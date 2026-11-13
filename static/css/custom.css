@@ -1,0 +1,17 @@
+.hero {
+    background: linear-gradient(135deg, #bb0ac8, #6610f2);
+    padding: 6rem 0;
+}
+
+.site-footer {
+    background-color: #190064;
+    color: #0a73dc;
+}
+
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}

@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+{% load humanize %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Our Services</h1>
+    <div class="row g-4">
+        {% for service in services %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    <p class="card-text">{{ service.description }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span class="fw-bold">${{ service.price|intcomma }}</span>
+                    <a href="#" class="btn btn-sm btn-primary">Book</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No services yet. Add some in the admin page.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

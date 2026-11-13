@@ -1,0 +1,66 @@
+{% extends 'master.html' %}
+{% load humanize %}
+
+{% block title %}Employees{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Employees</h1>
+
+    {% if employees %}
+    <div class="row g-3 mb-4 text-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm"><div class="card-body">
+                <div class="text-muted small">Total employees</div>
+                <div class="fs-3 fw-bold">{{ stats.total }}</div>
+            </div></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm"><div class="card-body">
+                <div class="text-muted small">Average age</div>
+                <div class="fs-3 fw-bold">{{ stats.avg_age|floatformat:1 }}</div>
+            </div></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm"><div class="card-body">
+                <div class="text-muted small">Average salary</div>
+                <div class="fs-3 fw-bold">${{ stats.avg_salary|floatformat:0|intcomma }}</div>
+            </div></div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Department</th>
+                    <th>Job Title</th>
+                    <th>Salary</th>
+                    <th>Hired</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.age }}</td>
+                    <td><span class="badge text-bg-secondary">{{ employee.department }}</span></td>
+                    <td>{{ employee.job_title }}</td>
+                    <td>${{ employee.salary|intcomma }}</td>
+                    <td>{{ employee.hire_date|date:"d M Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">No employees yet. Add some in the admin page.</div>
+    {% endif %}
+</div>
+{% endblock %}
